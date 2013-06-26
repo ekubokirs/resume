@@ -86,15 +86,6 @@ h4{
 	border: 2px solid #5b391e;
 	position: relative;
 }
-.employer{
-	margin: 25px;
-	padding: 5px;
-	border: 2px solid #5b391e;
-}
-.position{
-	margin: 25px;
-	padding: 5px;
-}
 .right2{
 	height:275px;
 	width: 700px;
@@ -102,15 +93,6 @@ h4{
 }
 .h4{
 	float:left;
-}
-.school{
-	margin: 25px;
-	padding: 5px;
-	border: 2px solid #5b391e;
-}
-.degree{
-	margin: 25px;
-	padding: 5px;
 }
 .sub{
 	position:absolute;
@@ -141,11 +123,8 @@ ul{
 }
 #education{
 	background-color: #1abdc6;
+	font-size: 20px;
 	z-index: -1;
-}
-#references{
-	background-color: #1abdc6;
-	z-index: -1
 }
 .left3{
 	width: 400px;

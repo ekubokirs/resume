@@ -14,7 +14,7 @@ $(document).ready(function(){
 			var city = response.responseJSON.contact_info.street_address.city;
 			var state = response.responseJSON.contact_info.street_address.state;
 			var zip_code= response.responseJSON.contact_info.street_address.zip_code;
-			var address=city+ ', '+state+''+zip_code;
+			var address=city+ ', '+state+' '+zip_code;
 
 				$('#name').html(fullName);
 				$('#email').html(email);
@@ -55,6 +55,111 @@ $(document).ready(function(){
 			function output_line_item (label_item, line_item, list){
 				list.append('<li><span class=\"label\">' + label_item + ': '+'</span>'+line_item+'</li>');
 			}
+
+//Adding the more blocks to each block on sign ups*/
+			$('.experience_block_add').click(function(){
+				var html =$('.experience_block').first().clone();
+	     			html.css('display','none');
+	     		$(this).before(html);
+	     			html.slideDown(600);
+					html.find('input').val('');
+				return false;
+			});
+
+			$('.education_block_add').click(function(){
+				var html =$('.education_block').first().clone();
+					html.css('display','none');
+				$(this).before(html);
+					html.slideDown(600);
+					html.find('input').val('');
+				return false;
+			});
+
+			$('.skill_block_add').click(function(){
+				var html = $('.skill_block').first().clone();
+					html.css('display','none')
+				$(this).before(html);
+					html.slideDown(600);
+					html.find('input').val('');
+				return false;
+			});
+
+//Reading data from signup.html
+		$('#userDataForm').submit(function(){
+			var userData={};
+				
+			userData.name_first=$('#firstName').val();
+			userData.name_late=$('#lastName').val();
+			userData.email=$('#email').val();
+			userData.phone=$('#phone').val();
+				
+			userData.street_address=$('#street').val();
+			userData.city=$('#city').val();
+			userData.state=$('#state').val();
+			userData.zip_code=$('#zipcode').val();
+
+			userData.twitter=$('#twitter').val();
+			userData.linkedin=$('#linkedin').val();
+
+
+			userData.experience=[];
+			var experience_blocks=$('.experience_block');
+
+			
+			experience_blocks.each(function(index,item){
+				
+				var startDate = $(item).find('.startdate').val();
+					var formattedStartDate = startDate.slice(5,7)+startDate.slice(2,4);
+				
+				var endDate = $(item).find('.enddate').val();
+					var formattedEndDate =endDate.slice(5,7)+endDate.slice(2,4);
+				
+				userData.experience.push({
+					start_month_year: formattedStartDate,
+					location: $(item).find('.location').val(),
+					end_month_year: formattedEndDate,
+					organization: $(item).find('.organization').val(),
+					project: $(item).find('.project').val(),
+					role: $(item).find('.position').val()
+				});
+			});
+
+			userData.schools= [];
+			var education_blocks=$('.education_block');
+
+			education_blocks.each(function(index, item) {
+				
+				var startDate = $(item).find('.startdate').val();
+					 var formattedStartDate = startDate.slice(5,7)+startDate.slice(2,4);
+				
+				var endDate = $(item).find('.enddate').val();
+					var formattedEndDate = endDate.slice(5,7)+endDate.slice(2,4);
+				
+				userData.schools.push({
+					start_month_year: formattedStartDate,
+					name 		: $(item).find('.school_id').val(),
+					degree 		: $(item).find('.degree').val(),
+					end_month_year	: formattedEndDate,
+					location 	: $(item).find('.location').val(),
+					major 		: $(item).find('.major').val(),
+					minor 		: $(item).find('.minor').val()
+				});
+			});
+
+			userData.skill=[];
+			var skill_blocks=$('.skill_block');
+
+			skill_blocks.each(function(index,item){
+				userData.skill.push({
+					category: $(item).find('.category').val(),
+					title: $(item).find('.title').val(),
+					/*experience: $(item).find('.experience').val()*/
+				});
+			});
+
+			console.log(userData);
+			return false;
+			});
 		}
 	})
 })
