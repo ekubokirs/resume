@@ -16,14 +16,19 @@ $(document).ready(function(){
 			var zip_code= response.responseJSON.contact_info.street_address.zip_code;
 			var address=city+ ', '+state+' '+zip_code;
 
+			var twitter = response.responseJSON.twitter;
+			var website = response.responseJSON.website;
+
 				$('#name').html(fullName);
 				$('#email').html(email);
 				$('#phone').html(phone);
 				$('#street').html(street);
 				$('#address').html(address);
+				$('#twitter').html(twitter);
+				$('#website').html(website);
 
 /*Adding arrays to index.html*/
-			for(i=0; i<response.responseJSON.experience.length; i++){
+			/*for(i=0; i<response.responseJSON.experience.length; i++){
 				var list = $('<ul>');
 				$('#experience').append(list);
 					output_line_item ('Organization', response.responseJSON.experience[i].organization, list);
@@ -54,7 +59,12 @@ $(document).ready(function(){
 			}		
 			function output_line_item (label_item, line_item, list){
 				list.append('<li><span class=\"label\">' + label_item + ': '+'</span>'+line_item+'</li>');
+			}*/
+			function generateSchoolBlock(currentSchool, schoolData){
+				var item= "<div class='education'><span class='schoolName'>"+schoolData.name+"</span><span class='degree'>"+schoolData.degree+"</span><span class='dates'> "+schoolData.start_month_year+'-'+schoolData.end_month_year+"</span><br><span class=gpa>GPA: "+schoolData.gpa+"</span><br><span class='major'>Major: "+schoolData.major+"</span><br><span class='minor'>Minor: "+schoolData.minor+"</span></div>"
+				$('#educationHolder').append(item);
 			}
+			$.each(response.responseJSON.schools,generateSchoolBlock);
 
 //Adding the more blocks to each block on sign ups*/
 			$('.experience_block_add').click(function(){
@@ -153,7 +163,7 @@ $(document).ready(function(){
 				userData.skill.push({
 					category: $(item).find('.category').val(),
 					title: $(item).find('.title').val(),
-					/*experience: $(item).find('.experience').val()*/
+					experience: $(item).find('.experience').val()
 				});
 			});
 

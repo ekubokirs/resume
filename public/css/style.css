@@ -1,16 +1,13 @@
-html{
-	background-color: #117e84;
-}
 .background{
-	background-color: #8ee9ee;
 	margin: 30px;
 	padding:20px;
 }
-.public a:link, a:visited{
-	color: #5b391e;
-}
-.public a:hover{
-	color: #083f42;
+.topnav a{
+	display: inline;
+	text-transform: uppercase;
+	margin: 2px;
+	padding: 10px;
+
 }
 .public{
 	text-transform: uppercase;
@@ -19,26 +16,19 @@ html{
 }
 #info{
 	text-align: center;
-	border:2px solid #5b391e;
+	border:2px solid black;
 	margin: 20px;
 	padding: 20px;
-	background-color: #bbf1f4;
-}
-h1{
-	font-size: 60px;
-	color: #5b391e;
 }
 h2{
 	font-size: 20px;
 	padding: 5px; 
 	margin: 5px;
-	color: #5b391e;
 }
 .address{
 	font-size: 20px;
 	padding: 5px; 
 	margin: 5px;
-	color: #5b391e
 }
 .left2{
 	width: 300px;
@@ -51,22 +41,12 @@ h2{
 }
 .nav a{
 	display: block;
-	color: #5b391e;
 	text-align: left;
 	text-transform: uppercase;
 	padding: 10px;
 	width: 150px;
 	font-size: 22px;
 	margin:2px;
-}
-.nav a:hover{
-	color: #083f42;
-}
-.nav li:nth-child(even){
-	background-color: #1abdc6;
-}
-.nav li:nth-child(odd){
-	background-color:#14939a;
 }
 h3{
 	display: inline;
@@ -83,8 +63,9 @@ h4{
 	margin-bottom: 20px;
 	margin-top: 25px;
 	padding: 20px;
-	border: 2px solid #5b391e;
+	border: 2px solid black;
 	position: relative;
+	border-radius: 30px;
 }
 .right2{
 	height:275px;
@@ -103,6 +84,7 @@ h4{
 	width: 100%;
 	overflow: auto;
 	color: #5b391e;
+	border-radius: 30px;
 }
 ul{
 	list-style-type: none;
@@ -135,7 +117,6 @@ ul{
 textarea{
 	height: 200px;
 	width: 350px;
-	background-color: #bbf1f4;
 	overflow:scroll;
 }
 .middle{
@@ -147,28 +128,22 @@ textarea{
 .interview{
 	font-size: 24px;
 	margin-top: 50px;
-	color: #5b391e;
-}
-.right3{
-	float:left;
-	width: 150px;
-	height:300px;
-	margin: 50px;
-}
-.right3 a:link, a:visited{
-	font-size: 22px;
-	color: #5b391e;
-}
-.right3 a:hover{
-	color:#083f42;
-}
-.table{
-	height:275px;
-	width: 700px;
-	margin: 10px;
 }
 #experience:target, #education:target, #skills:target, #references:target{
 	z-index: 2;
+}
+.schoolName{
+	border: 2px solid black;
+	margin: 30px;
+	padding: 2px;
+	font-size: 16px;
+}
+.education{
+	margin: 20px;
+	padding: 5px
+}
+.gpa{
+	margin-top: 20px;
 }
 .clearfix:after{
 	content: ".";
