@@ -4,7 +4,6 @@ $(document).ready(function(){
 			var object = response.responseJSON;
 			var resume= response.responseJSON[0];
 			console.log(object);
-			console.log(resume.id);
 /*Putting information into the index.html form*/
 			var firstName 	= resume.name_first;
 			var lastName 	= resume.name_last;
@@ -160,16 +159,19 @@ $(document).ready(function(){
 				});
 
 				console.log(userData);
-				$('.submit').click(function(){
-					var id= $('#name').data('id');
-						console.log(id);
+				
+				var JSON_data=JSON.stringify({'resume':userData});
+				console.log(JSON_data);
+				
 					$.ajax({
-						url: '/api/resumes'+id,
-						type: 'POST'
-					})/*end of ajax*/
-					window.location=window.location;
-				});/*end of function*/
-				console.log(id);
+						url: '/api/resumes',
+						type: 'POST',
+						data: JSON_data
+						success: function(response){
+							console.log(response);
+							return false;
+						}
+					});/*end of ajax*/
 				return false;
-			});
+			});/*end of submit function*/
 })/*end of document ready*/
