@@ -1,34 +1,69 @@
-.background{
-	margin: 30px;
-	padding:20px;
+html{
+	background-color: #7A6A53;
 }
-.topnav a{
-	display: inline;
-	text-transform: uppercase;
-	margin: 2px;
-	padding: 10px;
 
+.background{
+	margin: 50px;
+	padding: 20px;
+	background-color: #D5DED9;
+}
+.topnav{
+	width: 50%;
+	float: right;
+	list-style-type: none;
+	padding: 5px;
+	margin-right: 20px;
+}
+.topnav li{
+	float:right;
+	border: 1px solid #7A6A53;
+	padding: 10px;
+	margin-left: 5px;
+	font-size: 20px;
+	background-color: #99B2B7;
+	border-radius: 30px;
+}
+.topnav li a{
+	color: #7A6A53;
+	text-transform: uppercase;
+}
+.topnav a:hover{
+	color: #D5DED9;
+}
+#info{
+	text-align: center;
+	border:3px solid #7A6A53;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-bottom: 20px;
+	padding: 20px;
+	background-color: #D9CEB2;
+}
+h1{
+	font-size: 60px;
+	color: #7A6A53;
+}
+h2{
+	font-size: 20px;
+	padding: 5px; 
+	margin: 5px;
+	color: #7A6A53;
+}
+.address{
+	font-size: 20px;
+	padding: 5px; 
+	margin: 5px;
 }
 .public{
 	text-transform: uppercase;
 	text-align: center;
 	margin: 20px;
 }
-#info{
-	text-align: center;
-	border:2px solid black;
-	margin: 20px;
-	padding: 20px;
+.public a:link, a:visited{
+	color: #7A6A53;
 }
-h2{
-	font-size: 20px;
-	padding: 5px; 
-	margin: 5px;
-}
-.address{
-	font-size: 20px;
-	padding: 5px; 
-	margin: 5px;
+.public a:hover{
+	color: #D5DED9;
 }
 .left2{
 	width: 300px;
@@ -39,14 +74,25 @@ h2{
 	list-style-type: none;
 	margin-top: 25px;
 }
+.nav li{
+	padding: 10px;
+	font-size: 22px;
+	margin:2px;
+	border-radius: 10px;
+}
+.nav li:nth-child(even){
+	background-color: #D9CEB2;
+}
+.nav li:nth-child(odd){
+	background-color:#99B2B7;
+}
 .nav a{
 	display: block;
 	text-align: left;
 	text-transform: uppercase;
-	padding: 10px;
-	width: 150px;
-	font-size: 22px;
-	margin:2px;
+}
+.nav a:hover{
+	color: #D5DED9;
 }
 h3{
 	display: inline;
@@ -85,28 +131,49 @@ h4{
 	overflow: auto;
 	color: #5b391e;
 	border-radius: 30px;
-}
-ul{
-	list-style-type: none;
-}
-#experience{
-	background-color: #1abdc6;
-	z-index: -1;
 	font-size: 20px;
 }
-#skills{
-	background-color: #1abdc6;
+#experienceHolder:target, #educationHolder:target, #skillsHolder:target{
+	z-index: 2;
+}
+#experienceHolder{
+	background-color: #99B2B7;
+	position: absolute;
+	z-index: -1;
+}
+#skillsHolder{
+	background-color: #99B2B7;
 	position: absolute;
 	padding: 20px;
 	height:275px;
 	width: 700px;
-	font-size: 22px;
 	z-index: -1;
 }
-#education{
-	background-color: #1abdc6;
-	font-size: 20px;
+#educationHolder{
+	background-color: #99B2B7;
+	position: absolute;
 	z-index: -1;
+}
+.neweducation{
+	border-bottom: 1px solid #7A6A53;
+	margin: 20px;
+}
+.newskill{
+	border-bottom: 1px solid #7A6A53;
+	margin: 20px;
+}
+.schoolName{
+	font-weight: bold;
+}
+.newexperience{
+	border-bottom: 1px solid #7A6A53;
+	margin: 20px;
+}
+.newcategory{
+	font-weight: bold;
+}
+.neworganization{
+	font-weight: bold;
 }
 .left3{
 	width: 400px;
@@ -123,27 +190,39 @@ textarea{
 	float: left;
 	width:250px;
 	height: 300px;
-	margin: 50px
+	margin-left: 25px;
+	margin-bottom: 50px;
+	margin-right: 25px;
+	margin-top: 50px;
 }
+
 .interview{
 	font-size: 24px;
 	margin-top: 50px;
 }
-#experience:target, #education:target, #skills:target, #references:target{
-	z-index: 2;
+.right3{
+	float: left;
+	margin-top: 70px;
+	width: 175px;
 }
-.schoolName{
-	border: 2px solid black;
-	margin: 30px;
-	padding: 2px;
-	font-size: 16px;
+.navoptions{
+	list-style-type: none;
 }
-.education{
-	margin: 20px;
-	padding: 5px
+.navoptions li{
+	border: 1px solid #7A6A53;
+	padding: 10px;
+	font-size: 20px;
+	text-align: center;
+	margin: 10px;
+	background-color: #99B2B7;
+	border-radius: 30px;
 }
-.gpa{
-	margin-top: 20px;
+.navoptions a{
+	display: block;
+	text-transform: uppercase;
+}
+.navoptions a:hover{
+	color:#D5DED9;
 }
 .clearfix:after{
 	content: ".";
