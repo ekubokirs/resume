@@ -6,6 +6,7 @@ html{
 	margin: 50px;
 	padding: 20px;
 	background-color: #D5DED9;
+	border-radius: 10px;
 }
 .topnav{
 	width: 50%;
@@ -38,6 +39,7 @@ html{
 	margin-bottom: 20px;
 	padding: 20px;
 	background-color: #D9CEB2;
+	border-radius: 10px;
 }
 h1{
 	font-size: 60px;

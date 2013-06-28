@@ -1,0 +1,28 @@
+html{
+	background-color: #7A6A53;
+	color: #7A6A53;
+}
+body div{
+	background-color: #7A6A53;
+}
+body div form{
+	background-color: #D5DED9;
+	margin: 50px;
+	padding: 20px;
+	border-radius: 10px;
+}
+body div form legend{
+	border-color: #7A6A53;
+	color:#7A6A53;
+}
+body div form fieldset div{
+	background-color: #D5DED9;
+	color: #7A6A53;
+}
+body div  form fieldset span a{
+	color: #99B2B7;
+
+}
+body div  form fieldset span a:hover{
+	color:#D9CEB2;
+}

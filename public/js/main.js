@@ -166,7 +166,7 @@ $(document).ready(function(){
 					$.ajax({
 						url: '/api/resumes',
 						type: 'POST',
-						data: JSON_data
+						data: JSON_data,
 						success: function(response){
 							console.log(response);
 							return false;
