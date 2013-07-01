@@ -105,6 +105,10 @@ get '/' do
   erb :index
 end
 
+get '/wdiclass' do
+ erb :wdiclass
+end
+
 get '/api/resumes' do
   content_type :json
   

@@ -2,12 +2,16 @@ $(document).ready(function(){
 	$.ajax('/api/resumes',{
 		complete : function (response){
 			var object = response.responseJSON;
-			var resume= response.responseJSON[0];
-			console.log(object);
-/*Putting information into the index.html form*/
+			var resume = response.responseJSON[object.length-1];
+
+			console.log("my id: "+ resume.id);
+			console.log(resume);
+			/*Putting information into the index.html form*/
 			var firstName 	= resume.name_first;
 			var lastName 	= resume.name_last;
 			var fullName	= firstName + ' '+ lastName;
+
+			console.log( "my name: "+fullName );
 
 			var email		= resume.contact_info.email;
 			var phone		= resume.contact_info.phone;
@@ -16,7 +20,7 @@ $(document).ready(function(){
 			var city 		= resume.contact_info.street_address.city;
 			var state		= resume.contact_info.street_address.state;
 			var zip_code	= resume.contact_info.street_address.zip_code;
-			var address 	=city+ ', '+state+' '+zip_code;
+			var address 	= city+ ', '+state+' '+zip_code;
 
 			var twitter		= resume.twitter;
 			var website		= resume.website;
@@ -48,130 +52,155 @@ $(document).ready(function(){
 			$.each(resume.skill,generateSkillBlock);
 		}
 	});/*end of ajax request*/
-		$('.delete').click(function(){
-			var id= $('#name').data('id');
-			console.log(id);
-				$.ajax({
-					url: '/api/resumes'+id,
-					type: 'DELETE'
-				})/*end of ajax3*/
-				window.location=window.location;
-		});/*end of function*/
+
+	$('.delete').click(function(){
+		var id= $('#name').data('id');
+		console.log(id);
+		$.ajax({
+			url: '/api/resumes/'+id,
+			type: 'DELETE',
+			success: 'You have deleted a file'
+		}).done( function(){
+			alert('Deleted '+id);
+		});/*end of ajax3*/
+		window.location=window.location;
+	});/*end of function*/
 	
 	//Adding the more blocks to each block on sign ups*/
-			$('.experience_block_add').click(function(){
-				var html =$('.experience_block').first().clone();
-	     			html.css('display','none');
-	     		$(this).before(html);
-	     			html.slideDown(600);
-					html.find('input').val('');
-				return false;
+	$('.experience_block_add').click(function(){
+		var html =$('.experience_block').first().clone();
+ 			html.css('display','none');
+ 		$(this).before(html);
+ 			html.slideDown(600);
+			html.find('input').val('');
+		return false;
+	});
+
+	$('.education_block_add').click(function(){
+		var html =$('.education_block').first().clone();
+			html.css('display','none');
+		$(this).before(html);
+			html.slideDown(600);
+			html.find('input').val('');
+		return false;
+	});
+
+	$('.skill_block_add').click(function(){
+		var html = $('.skill_block').first().clone();
+			html.css('display','none')
+		$(this).before(html);
+			html.slideDown(600);
+			html.find('input').val('');
+		return false;
+	});
+
+	//Reading data from signup.html
+	$('#userDataForm').submit(function(){
+		var userData={};
+			
+		userData.name_first	=$('.firstName').val();
+		userData.name_last	=$('.lastName').val();
+		
+		userData.contact_info={};
+		userData.contact_info.email	=$('.email').val();
+		userData.contact_info.phone	=$('.phone').val();
+			
+		userData.contact_info.street_address={};
+		userData.contact_info.street_address.street	=$('#street').val();
+		userData.contact_info.street_address.city	=$('.city').val();
+		userData.contact_info.street_address.state	=$('.state').val();
+		userData.contact_info.street_address.zip_code=$('.zipcode').val();
+
+		userData.twitter	=$('.twitter').val();
+		userData.linked_in	=$('.linkedin').val();
+		userData.website	=$('.website').val();
+
+
+		userData.experience=[];
+		var experience_blocks=$('.experience_block');
+
+		
+		experience_blocks.each(function(index,item){
+			
+			var startDate = $(item).find('.startdate').val();
+				var formattedStartDate = startDate.slice(5,7)+startDate.slice(2,4);
+			
+			var endDate = $(item).find('.enddate').val();
+				var formattedEndDate =endDate.slice(5,7)+endDate.slice(2,4);
+			
+			userData.experience.push({
+				start_month_year: formattedStartDate,
+				location: $(item).find('.location').val(),
+				end_month_year: formattedEndDate,
+				organization: $(item).find('.organization').val(),
+				project: $(item).find('.project').val(),
+				role: $(item).find('.position').val(),
+
+				// $$TEMP: hack
+				responsibilities : ['blah', 'blah blah']
 			});
+		});
 
-			$('.education_block_add').click(function(){
-				var html =$('.education_block').first().clone();
-					html.css('display','none');
-				$(this).before(html);
-					html.slideDown(600);
-					html.find('input').val('');
-				return false;
+		userData.schools= [];
+		var education_blocks=$('.education_block');
+
+		education_blocks.each(function(index, item) {
+			
+			var startDate = $(item).find('.startdate').val();
+				 var formattedStartDate = startDate.slice(5,7)+startDate.slice(2,4);
+			
+			var endDate = $(item).find('.enddate').val();
+				var formattedEndDate = endDate.slice(5,7)+endDate.slice(2,4);
+			
+			userData.schools.push({
+				start_month_year: formattedStartDate,
+				name 		: $(item).find('.school_id').val(),
+				degree 		: $(item).find('.degree').val(),
+				end_month_year	: formattedEndDate,
+				location 	: $(item).find('.location').val(),
+				major 		: $(item).find('.major').val(),
+				minor 		: $(item).find('.minor').val()
 			});
+		});
 
-			$('.skill_block_add').click(function(){
-				var html = $('.skill_block').first().clone();
-					html.css('display','none')
-				$(this).before(html);
-					html.slideDown(600);
-					html.find('input').val('');
-				return false;
+		userData.skill=[];
+		var skill_blocks=$('.skill_block');
+
+		skill_blocks.each(function(index,item){
+			userData.skill.push({
+				category: $(item).find('.category').val(),
+				title: $(item).find('.title').val(),
+				experience: $(item).find('.experience').val()
 			});
-			//Reading data from signup.html
-			$('#userDataForm').submit(function(){
-				var userData={};
-					
-				userData.name_first=$('.firstName').val();
-				userData.name_last=$('.lastName').val();
-				userData.email=$('.email').val();
-				userData.phone=$('.phone').val();
-					
-				userData.street_address=$('#street').val();
-				userData.city=$('.city').val();
-				userData.state=$('.state').val();
-				userData.zip_code=$('.zipcode').val();
+		});
 
-				userData.twitter=$('.twitter').val();
-				userData.linkedin=$('.linkedin').val();
+		console.log(userData);
+		
+		var JSON_data=JSON.stringify({'resume':userData});
+		console.log(JSON_data);
+		
+			$.ajax({
+				url: '/api/resumes',
+				type: 'POST',
+				data: JSON_data,
+				success: function(response){
+					console.log(response);
+					return false;
+				}
+			});/*end of ajax*/
+		return false;
+	});/*end of submit function*/
 
-
-				userData.experience=[];
-				var experience_blocks=$('.experience_block');
-
-				
-				experience_blocks.each(function(index,item){
-					
-					var startDate = $(item).find('.startdate').val();
-						var formattedStartDate = startDate.slice(5,7)+startDate.slice(2,4);
-					
-					var endDate = $(item).find('.enddate').val();
-						var formattedEndDate =endDate.slice(5,7)+endDate.slice(2,4);
-					
-					userData.experience.push({
-						start_month_year: formattedStartDate,
-						location: $(item).find('.location').val(),
-						end_month_year: formattedEndDate,
-						organization: $(item).find('.organization').val(),
-						project: $(item).find('.project').val(),
-						role: $(item).find('.position').val()
-					});
-				});
-
-				userData.schools= [];
-				var education_blocks=$('.education_block');
-
-				education_blocks.each(function(index, item) {
-					
-					var startDate = $(item).find('.startdate').val();
-						 var formattedStartDate = startDate.slice(5,7)+startDate.slice(2,4);
-					
-					var endDate = $(item).find('.enddate').val();
-						var formattedEndDate = endDate.slice(5,7)+endDate.slice(2,4);
-					
-					userData.schools.push({
-						start_month_year: formattedStartDate,
-						name 		: $(item).find('.school_id').val(),
-						degree 		: $(item).find('.degree').val(),
-						end_month_year	: formattedEndDate,
-						location 	: $(item).find('.location').val(),
-						major 		: $(item).find('.major').val(),
-						minor 		: $(item).find('.minor').val()
-					});
-				});
-
-				userData.skill=[];
-				var skill_blocks=$('.skill_block');
-
-				skill_blocks.each(function(index,item){
-					userData.skill.push({
-						category: $(item).find('.category').val(),
-						title: $(item).find('.title').val(),
-						experience: $(item).find('.experience').val()
-					});
-				});
-
-				console.log(userData);
-				
-				var JSON_data=JSON.stringify({'resume':userData});
-				console.log(JSON_data);
-				
-					$.ajax({
-						url: '/api/resumes',
-						type: 'POST',
-						data: JSON_data,
-						success: function(response){
-							console.log(response);
-							return false;
-						}
-					});/*end of ajax*/
-				return false;
-			});/*end of submit function*/
+	$('.previous').click(function(){
+		var id= $('#name').data('id');
+		$.ajax({
+			if (resume.id === response.responseJSON[i].id){
+				var resume = response.responseJSON[object.length-1]
+				}//end of if function
+			url: response.responseJSON[i-1],
+			type: 'GET',
+			success: console.log(id)
+		});//end of ajax function
+	});//end of *previous fuction
 })/*end of document ready*/
+
