@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>R&eacute;sum&eacute;</title>
+  </head>
+  <body>
+    <button id="post">Test POST</button>
+    <button id="put">Test PUT</button>
+    <button id='delete'>Test DELETE</button>
+
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript">
+    
+    var resume = {"name_first" : "Bob", "street":"glitter"};
+      var data = JSON.stringify({"resume": resume});
+    var update = {"name_first" : "Becca", "street":"hookers"};
+      var udata=JSON.stringify({"resume": update});
+
+      
+     $(document).ready(function(){
+      console.log("loaded");
+      console.log(data);
+
+        $('#post').on('click', function() {
+          $.ajax({
+            method:       'POST',
+            url:          '/',
+            contentType:  'application/json',
+            data:         data,
+            success: function(data) {
+              console.log("success-Posted Data", data);
+            }
+          });//end of ajax function
+        });//end of post function
+
+        $('#put').on('click', function() {
+          $.ajax({
+            method:     'PUT',
+            url:        '/51d372ea8ed32de581000009',
+            data:       udata,
+            success: function(data){
+              console.log("success-Updated Data", data);
+            }
+          });//end of ajax
+        });//end of put function
+
+         $('#delete').on('click', function() {
+          $.ajax({
+            method: 'DELETE',
+            url: '/51d370728ed32de581000008',
+            success: function(data){
+              console.log("success-Deleted Data", data);
+            }
+          });//end of ajax
+        });//end of delete function
+      });//end of document ready
+    </script>
+  </body>
+</html>

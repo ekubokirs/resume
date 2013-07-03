@@ -8,10 +8,9 @@ $(document).ready(function(){
 			console.log(resume);
 			/*Putting information into the index.html form*/
 			var firstName 	= resume.name_first;
+			var middleName	= resume.name_middle;
 			var lastName 	= resume.name_last;
-			var fullName	= firstName + ' '+ lastName;
-
-			console.log( "my name: "+fullName );
+			var fullName	= firstName + ' '+middleName+' '+ lastName;
 
 			var email		= resume.contact_info.email;
 			var phone		= resume.contact_info.phone;
@@ -159,7 +158,8 @@ $(document).ready(function(){
 				end_month_year	: formattedEndDate,
 				location 	: $(item).find('.location').val(),
 				major 		: $(item).find('.major').val(),
-				minor 		: $(item).find('.minor').val()
+				minor 		: $(item).find('.minor').val(),
+				GPA 		: $(item).find('.gpa').val()
 			});
 		});
 
@@ -191,16 +191,21 @@ $(document).ready(function(){
 		return false;
 	});/*end of submit function*/
 
-	$('.previous').click(function(){
-		var id= $('#name').data('id');
-		$.ajax({
-			if (resume.id === response.responseJSON[i].id){
-				var resume = response.responseJSON[object.length-1]
-				}//end of if function
-			url: response.responseJSON[i-1],
-			type: 'GET',
-			success: console.log(id)
-		});//end of ajax function
-	});//end of *previous fuction
+	// $('.previous').click(function(){
+	// 	var id= $('#name').data('id');
+	// 	$('#name').removeData();
+	// 	$.ajax('api.resumes',{
+	// 		complete:function(response){
+	// 			var totalResumes = response.responseJSON.length;
+	// 			for(i=0; i<totalResumes; i++){
+	// 				if (i === response.responseJSON.length-1)
+	// 					var resume=response.responseJSON[0];
+	// 				else
+	// 					var resume=response.responseJSON[i-1];
+	// 				fill
+	// 			}
+	// 		}//end of complete function
+	// 	});//end of ajax function
+	// });//end of *previous fuction
 })/*end of document ready*/
 
